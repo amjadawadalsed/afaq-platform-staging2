@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إدارة البرامج - لوحة المشرف</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon-180.png">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">آفاق للقراءة والكتابة<small>لوحة المشرف</small></div>
+      <nav class="sidebar-nav">
+        <a href="admin.html">المستخدمون</a>
+        <a href="admin-programs.html" class="active">البرامج</a>
+        <a href="admin-lessons.html">الدروس</a>
+        <a href="admin-alerts.html">التنبيهات</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="who" id="whoAmI">...</div>
+        <button class="btn-ghost" style="width:100%; color:#fff; border-color:rgba(255,255,255,.3);" onclick="logout()">تسجيل الخروج</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="page-header">
+        <h1>إدارة البرامج</h1>
+        <p>كل طالب ينتمي لبرنامج واحد، وكل درس يتبع برنامجاً محدداً.</p>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; margin-bottom:16px;">
+        <button class="btn-primary" onclick="openProgramModal()">+ إضافة برنامج جديد</button>
+      </div>
+
+      <div id="listMsg"></div>
+
+      <div class="register" id="programsRegister">
+        <div class="register-row head" style="grid-template-columns: 1fr 2fr 0.6fr;">
+          <div>اسم البرنامج</div>
+          <div>الوصف</div>
+          <div>إجراء</div>
+        </div>
+        <div id="programsList">
+          <div class="empty-state">جارٍ التحميل...</div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- نافذة إضافة/تعديل برنامج -->
+  <div class="modal-overlay" id="programModalOverlay" hidden>
+    <div class="modal">
+      <h2 id="programModalTitle">إضافة برنامج جديد</h2>
+      <div id="programMsg"></div>
+      <form id="programForm">
+        <input type="hidden" id="programId">
+        <div class="field">
+          <label for="programName">اسم البرنامج</label>
+          <input type="text" id="programName" required>
+        </div>
+        <div class="field">
+          <label for="programDescription">وصف مختصر (اختياري)</label>
+          <input type="text" id="programDescription">
+        </div>
+        <div class="modal-actions">
+          <button type="submit" class="btn-primary" id="programSubmitBtn">حفظ</button>
+          <button type="button" class="btn-ghost" onclick="closeProgramModal()">إلغاء</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/supabaseClient.js"></script>
+  <script src="assets/auth.js"></script>
+  <script src="assets/admin-programs.js"></script>
+</body>
+</html>
